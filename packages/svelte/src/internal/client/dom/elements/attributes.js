@@ -47,8 +47,10 @@ export function set_attribute(element, attribute, value) {
 
 	if (value === null) {
 		element.removeAttribute(attribute);
+		delete element.__attributes[attribute];
 	} else {
 		element.setAttribute(attribute, value);
+		element.__attributes[attribute] = value;
 	}
 }
 
@@ -141,6 +143,7 @@ export function set_attributes(element, prev, attrs, lowercase_attributes, css_h
 			}
 		} else if (value == null) {
 			element.removeAttribute(key);
+			delete element.__attributes[key];
 		} else if (key === 'style') {
 			element.style.cssText = value + '';
 		} else if (key === 'autofocus') {
